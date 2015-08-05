@@ -1,0 +1,83 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@color/pn_red"
+        >
+
+        <TextView
+            android:id="@+id/main_username"
+            android:text="Kevin"
+            android:layout_centerInParent="true"
+            android:textColor="@color/white"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="25sp"/>
+
+        <View
+            android:layout_alignParentBottom="true"
+            android:layout_width="match_parent"
+            android:layout_height="3dp"
+            android:background="@drawable/light_fade_up"/>
+
+    </RelativeLayout>
+
+    <TextView
+        android:textSize="25sp"
+        android:gravity="center"
+        android:text="@string/make_call"
+        android:layout_margin="25dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft  ="@dimen/activity_horizontal_margin"
+        android:paddingRight ="@dimen/activity_horizontal_margin"
+        android:paddingBottom="10dp"
+        android:orientation="horizontal">
+        <EditText
+            android:id="@+id/call_num"
+            android:hint="Enter a number..."
+            android:inputType="textShortMessage"
+            android:maxLines="1"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="4"/>
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+            <ImageButton
+                android:background="@drawable/round_button_send"
+                android:src="@drawable/ic_action_call"
+                android:layout_centerInParent="true"
+                android:layout_height="50dp"
+                android:layout_width ="50dp"
+                android:scaleType="fitCenter"
+                android:padding="8dp"
+                android:onClick="makeCall"/>
+        </RelativeLayout>
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="3dp"
+        android:background="@drawable/light_fade_down"/>
+
+    <TextView
+        android:textSize="25sp"
+        android:gravity="center"
+        android:text="@string/receive_call"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/grey"/>
+
+</LinearLayout>

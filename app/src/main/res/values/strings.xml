@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">PnWebRTC App</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="title_activity_video_chat">Video Call</string>
+    <string name="title_activity_incoming_call">Incoming Call</string>
+    <string name="make_call">Make a call</string>
+    <string name="receive_call">Ready to receive a call!</string>
+
+    <string name="title_activity_login">Login</string>
+    <string name="login">Choose a username:</string>
+    <string name="username">Username</string>
+    <string name="login_submit">Sign in!</string>
+
+    <string name="enter_new_channel">Enter new channel:</string>
+    <string name="action_sign_out">Sign Out</string>
+
+</resources>
