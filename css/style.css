@@ -1,0 +1,60 @@
+/* 
+<color name="pn_red">#d02129</color>
+<color name="pn_blue">#19a2c6</color>
+<color name="pn_blue_dark">#187998</color>
+*/
+body{
+	margin:0;
+	background: #19a2c6;
+	font-family: monospace;
+	color: white;
+	font-size: 14px;
+}
+
+h1 {
+	margin: 10px 5px;
+}
+
+#subtitle {
+}
+
+#header {
+	text-align: center;
+	/*background: #187998;*/
+	background: #d02129;
+	padding: 5px;
+}
+
+#keys {
+	/*background: #d02129;*/
+	background: #187998;
+	color: white;
+	text-align: center;
+	width:100%;
+	margin: 0;
+	padding: 10px 0;
+}
+
+	#keys a {
+		color:white;
+	}
+
+input[type="text"] {
+	padding: 5px;
+	border-radius: 5px;
+}
+
+#rtc-demo {
+	background: #19a2c6;
+	text-align: center;
+	padding: 10px 0;
+}
+
+#rtc-demo input[type="submit"] {
+	width:50px;
+}
+
+#vid-box {
+	margin: 15px;
+}
+

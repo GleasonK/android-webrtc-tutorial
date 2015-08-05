@@ -1,1 +1,200 @@
-Hello World
+<html>
+<head>
+	<title>PnWebRTC Tutorial - Debugger</title>
+	<link rel="stylesheet" type="text/css" href="css/style.css">
+</head>
+<body>
+	<div id="header">
+		<h1>PubNub Android WebRTC Signaling Debugger</h1>
+		<p id="subtitle"><i>This debugger can receive and send calls to the Android RTC app.</i></p>
+	</div>
+	<div id="keys">
+		<p>Fill in Pub/Sub Keys first (<a href="https://admin.pubnub.com" target="_blank">get keys</a>):</p>
+		<form action="index.html" onsubmit="return updateKeys()">
+			<label for="pub_key">Pub Key:</label>
+			<input type="text" id="pub_key" name="pub_key" value="demo" size="64"/><br><br>
+			<label for="sub_key">Sub Key:</label>
+			<input type="text" id="sub_key" name="sub_key" value="demo" size="64"/><br><br>
+			<input type="submit" value="update"/>
+		</form>
+	</div>
+
+	<div id="rtc-demo">
+		<div id="vid-box">[<i>Video will appear here</i>]</div>
+		<form name="loginForm" id="login" action="#" onsubmit="return login(this);">
+		    <label for="username">User Name:</label>
+		    <input type="text" name="username" id="username" placeholder="Pick a username!"  size="32"/>
+		    <input type="submit" name="login_submit" value="Log In">
+		</form>
+		
+		<form name="callForm" id="call" action="#" onsubmit="return makeCall(this);">
+			<label for="number">Make Call:</label>
+			<input type="text" name="number" placeholder="Enter user to dial!" size="32"/>
+			<input type="submit" value="Call"/>
+		</form>
+		<button onclick="end()">End Call</button><br>
+		<div id="chat" hidden="true">
+			<input type="text" id="chat-msg" placeholder="Enter a message..."/>
+			<button onclick="sendMessage()">Send</button>
+			<div id="chat-box"></div>
+		</div>
+		<p><b>Instructions:</b></p>
+		<p><span class="step-num">1.</span><br>Fill in your Pub and Sub keys and click update.</p>
+		<p><span class="step-num">2.</span><br>Log in to a username. Box will turn green when a connection is established.</p>
+		<p><span class="step-num">3.</span><br>Either call your AndroidRTC username, or call your debugger username from the App.</p>
+	</div>
+
+
+</body>
+<script src="https://cdn.pubnub.com/pubnub-dev.js"></script>
+<script type="text/javascript" src="js/webrtc.js"></script>
+<script type="text/javascript" src="js/rtc-controller.js"></script>
+<script type="text/javascript">
+
+var urlargs = urlparams();
+
+var pkey = document.getElementById("pub_key");
+var skey = document.getElementById("sub_key");
+
+var video_out = document.getElementById("vid-box");
+var userId= "";
+var standby_suffix = "-stdby";
+
+if ('pub_key' in urlargs) {
+	pkey.value = urlargs.pub_key;
+}
+if ('sub_key' in urlargs){
+	skey.value = urlargs.sub_key;
+}
+
+function urlparams() {
+	var params = {};
+	if (location.href.indexOf('?') < 0) return params;
+
+	PUBNUB.each(
+			location.href.split('?')[1].split('&'),
+			function(data) { var d =
+			data.split('='); params[d[0]] = d[1]; }
+			);
+
+	return params;
+}
+
+function urlstring(params) {                                            
+	return location.href.split('?')[0] + '?' + PUBNUB.map(              
+			params, function( key, val) { return key + '=' + val }          
+			).join('&');                                                        
+} 
+
+function updateKeys(){
+	if (!pkey.value || !skey.value) {
+		alert("Invalid Key");
+		return false;
+	}
+	urlargs.pub_key = pkey.value;
+	urlargs.sub_key = skey.value;
+	location.href = urlstring(urlargs);
+	return false;	
+}
+
+function login(form){
+	userId = form.username.value || "Anonymous";
+	var userIdStdBy = userId + standby_suffix;
+	var pubnub = window.pubnub = PUBNUB({                          
+        publish_key   : pkey.value,
+        subscribe_key : skey.value,
+        uuid: userId
+	});
+	
+	pubnub.subscribe({                                     
+        channel : userIdStdBy,
+        message : incomingCall,
+        connect: function(e){ 
+	        pubnub.state({
+				channel: userIdStdBy,
+				uuid: userId,
+				state: {"status" : "Available"},
+				callback: function(m){
+					form.login_submit.disabled = true;
+					form.username.style.background="#55ff5b"; 
+					console.log(JSON.stringify(m))
+				}
+			});
+	        console.log("Subscribed and ready!");  
+	    }
+    });
+    return false;
+}
+
+function incomingCall(m){
+	video_out.innerHTML="Connecting...";
+	setTimeout(function(){ 
+		if (!window.phone) phoneStart();
+		phone.dial(m["call_user"]); 
+	}, 2000);
+}
+
+//jsonCall.put(Constants.JSON_CALL_USER, username);
+//jsonCall.put(Constants.JSON_CALL_TIME, System.currentTimeMillis());
+function makeCall(form){
+	if (!window.pubnub) alert("Login First!");
+	
+	//Publish to their standby.
+	var callUser = form.number.value;
+	var stdByCh  = callUser + standby_suffix;
+	var msg = {"call_user":userId,"call_time":new Date().getMilliseconds()};
+	console.log("HERE" + callUser + stdByCh);
+	window.pubnub.publish({
+		channel:stdByCh,
+		message:msg,
+		callback:function(m){ console.log(m); }
+	});
+	if (!window.phone) phoneStart();
+// 	window.phone.dial(callUser); 
+	return false;
+}
+
+function phoneStart() {
+	var phone = window.phone = PHONE({
+	    number        : userId || "Anonymous", // listen on username line else Anonymous
+	    publish_key   : pkey.value, // Your Pub Key
+	    subscribe_key : skey.value, // Your Sub Key
+	});	
+	phone.ready(function(){
+		console.log("Phone ON!");
+	});
+	phone.receive(function(session){
+		session.message(message);
+	    session.connected(function(session) { 
+	    	video_out.innerHTML="";
+	    	video_out.appendChild(session.video); 
+	    });
+	    session.ended(function(session) { video_out.innerHTML=''; });
+	});
+}
+
+function end(){
+	if(window.phone) window.phone.hangup();
+}
+
+
+// Will format in 12-hour h:mm.s a time format
+function formatTime(millis){
+	var d = new Date(millis);
+	var h = d.getHours();
+	var m = d.getMinutes();
+	var s = d.getSeconds();
+	var a = (Math.floor(h/12)===0) ? "am" : "pm";
+	return (h%12)+":"+m+"."+s + " " + a;
+}
+
+// -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=->
+// XSS Prevent
+// -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=->
+function safetxt(text) {
+    return (''+text).replace( /[<>]/g, '' );
+}
+
+</script>
+</html>
+
