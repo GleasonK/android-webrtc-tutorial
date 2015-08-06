@@ -195,6 +195,10 @@ function safetxt(text) {
     return (''+text).replace( /[<>]/g, '' );
 }
 
+function message( session, message ) {
+    add_chat( session.number, message );
+}
+
 </script>
 </html>
 
