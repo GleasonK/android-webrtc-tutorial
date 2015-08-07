@@ -478,7 +478,7 @@ This code will solve most of those issues for you. The `PnRTCClient` will handle
 
 ## Part 4. BONUS: User Messages
 
-<img src="img/Kurt.png" height=500/>
+<img src="img/kurt.png" height=500/>
 
 Say you want to exchange custom information in your app, whether that be chat or game scores of some sort. You can accomplish this by transmitting user messages with the `PnRTCClient`. For simplicity's sake, I'm not going to get into creating views and buttons for messaging, but I will cover the messaging protocol. For this example, we will be sending a JSON user message of the form `{"msg_user":"Username","msg_text","Hello RTC!"}`. The function to send a message might look like this:
 
