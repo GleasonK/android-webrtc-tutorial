@@ -11,12 +11,14 @@ import android.widget.TextView;
 
 import me.pntutorial.pnrtcblog.util.Constants;
 
-
+/**
+ * TODO: Uncomment mPubNub instance variable
+ */
 public class MainActivity extends Activity {
     private SharedPreferences mSharedPreferences;
     private TextView mUsernameTV;
     private EditText mCallNumET;
-
+    // private Pubnub mPubNub;
     private String username;
 
     /**
@@ -38,8 +40,8 @@ public class MainActivity extends Activity {
         }
         this.username = this.mSharedPreferences.getString(Constants.USER_NAME, "");
 
-        this.mCallNumET   = (EditText) findViewById(R.id.call_num);
-        this.mUsernameTV  = (TextView) findViewById(R.id.main_username);
+        this.mCallNumET  = (EditText) findViewById(R.id.call_num);
+        this.mUsernameTV = (TextView) findViewById(R.id.main_username);
 
         this.mUsernameTV.setText(this.username);  // Set the username to the username text view
 
