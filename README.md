@@ -1,6 +1,6 @@
 # Android WebRTC Video Chat App
 
-<img src="img/PnWebRTC.png" width=800/>
+<img src="http://kevingleason.me/android-webrtc-tutorial/assets/PnWebRTC.png" width=800/>
 
 ###Big News: PubNub has an official Android WebRTC Signaling API! 
 
@@ -156,7 +156,7 @@ This function subscribes you to the username's standby channel. When it receives
 
 ### 2.3 Making Calls
 
-<img src="img/Kevin.png" height=500/>
+<img src="http://kevingleason.me/android-webrtc-tutorial/assets/Kevin.png" height=500/>
 
 Now that we have handled receiving calls, let us now write the code to place calls. You will need an `EditText` and a `Button` in your activity, which the template provides. When we push the button, we will invoke the function `makeCall` which will send a JSON message to the other user to show we would like to chat.
 
@@ -198,7 +198,7 @@ Time to begin the true PnWebRTC code! From a high level, we will access the came
 
 ### 3.1 VideoChatActivity Layout
 
-<img src="img/xml_view.png" height=500 />
+<img src="http://kevingleason.me/android-webrtc-tutorial/assets/xml_view.png" height=500 />
 
 To get started let's a new activity called `VideoChatActivity`. The XML layout for the activity should look something like this:
 
@@ -478,7 +478,7 @@ This code will solve most of those issues for you. The `PnRTCClient` will handle
 
 ## Part 4. BONUS: User Messages
 
-<img src="img/kurt.png" height=500/>
+<img src="http://kevingleason.me/android-webrtc-tutorial/assets/kurt.png" height=500/>
 
 Say you want to exchange custom information in your app, whether that be chat or game scores of some sort. You can accomplish this by transmitting user messages with the `PnRTCClient`. For simplicity's sake, I'm not going to get into creating views and buttons for messaging, but I will cover the messaging protocol. For this example, we will be sending a JSON user message of the form `{"msg_user":"Username","msg_text","Hello RTC!"}`. The function to send a message might look like this:
 
