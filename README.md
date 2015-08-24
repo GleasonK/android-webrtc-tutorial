@@ -78,9 +78,9 @@ That will grand camera, mic, and internet permissions needed for this app to fun
 ```gradle
 dependencies {
 	...
-    compile 'io.pristine:libjingle:9127@aar'
+    compile 'io.pristine:libjingle:9694@aar'
     compile 'com.pubnub:pubnub-android:3.7.4'
-    compile 'me.kevingleason:pnwebrtc:1.0.5@aar'
+    compile 'me.kevingleason:pnwebrtc:1.0.6@aar'
 }
 ```
 
@@ -351,7 +351,7 @@ Here x and y are starting position with (0,0) being the top left. The width and 
 
 ### 3.5 PnWebRTC Signaling - PnRTCListener
 
-Signaling relies almost entirely callbacks, so take a moment and read about all the [callbacks offered by PnWebRTC](https://github.com/GleasonK/pubnub-android-webrtc#pnrtclistener-callbacks). Your app's functionality relies on your implementation of a `PnRTCListener`. Take a moment to think about app design and how you should use these callbacks. `PnRTCListener` is an abstract class, so you need to extend it and only override the methods you plan on using. I recommend using a nested private class so you have access to all of `VideoChatActivity`'s views.
+Signaling relies almost entirely callbacks, so take a moment and read about all the [callbacks offered by PnWebRTC](https://github.com/GleasonK/android-webrtc-api#pnrtclistener-callbacks). Your app's functionality relies on your implementation of a `PnRTCListener`. Take a moment to think about app design and how you should use these callbacks. `PnRTCListener` is an abstract class, so you need to extend it and only override the methods you plan on using. I recommend using a nested private class so you have access to all of `VideoChatActivity`'s views.
 
 ```java
 public class VideoChatActivity extends Activity {
@@ -534,8 +534,8 @@ If we're being honest, I'm impressed you scrolled down this far. If you've made 
 - [PubNub Javascript WebRTC SDK][JS SDK], this javascript library is fully compatible with the PnWebRTC API in case you want to make a multi-platform chat.
 
 [Repo]:https://github.com/GleasonK/android-webrtc-tutorial
-[PnWebRTC]:https://github.com/GleasonK/pubnub-android-webrtc
-[Docs]:http://kevingleason.me/pubnub-android-webrtc/
+[PnWebRTC]:https://github.com/GleasonK/android-webrtc-api
+[Docs]:http://kevingleason.me/android-webrtc-api/
 [AndroidRTC]:https://github.com/GleasonK/AndroidRTC/
 [VCA AndroidRTC]:https://github.com/GleasonK/AndroidRTC/blob/master/app/src/main/java/me/kevingleason/androidrtc/VideoChatActivity.java
 [JS SDK]:https://github.com/stephenlb/webrtc-sdk
