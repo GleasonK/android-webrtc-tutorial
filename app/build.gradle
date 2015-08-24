@@ -22,7 +22,7 @@ android {
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     // TODO: Uncomment the following compilation lines
-//    compile 'io.pristine:libjingle:9127@aar'
+//    compile 'io.pristine:libjingle:9694@aar'
 //    compile 'com.pubnub:pubnub-android:3.7.4'
-//    compile 'me.kevingleason:pnwebrtc:1.0.5@aar'
+//    compile 'me.kevingleason:pnwebrtc:1.0.6@aar'
 }
