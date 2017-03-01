@@ -6,6 +6,10 @@
 
 This means that you can now create video chatting applications natively on Android in a breeze. Best of all, it is fully compatible with the PubNub Javascript WebRTC SDK! That's right, you are minutes away from creating your very own cross platform video-chatting application.
 
+_NOTE:_ The following demo uses The PubNub Android WebRTC SDK for signaling to transfer the metadata and establish the peer-to-peer connection. Once the connection is established, the video and voice runs on public Google STUN/TURN servers.
+
+Keep in mind, PubNub can provide the signaling for WebRTC, and requires you to combine it with a hosted WebRTC solution. For more detail on what PubNub does, and what PubNub doesn’t do with WebRTC, check out this article: https://support.pubnub.com/support/solutions/articles/14000043715-does-pubnub-provide-webrtc-and-video-chat-
+
 ## Why PubNub? Signaling.
 
 WebRTC is not a standalone API, it needs a signaling service to coordinate communication. Metadata needs to be sent between callers before a connection can be established. 
