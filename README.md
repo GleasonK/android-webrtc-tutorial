@@ -2,7 +2,7 @@
 
 <img src="http://kevingleason.me/android-webrtc-tutorial/assets/PnWebRTC.png" width=800/>
 
-###Big News: PubNub has an official Android WebRTC Signaling API! 
+### Big News: PubNub has an official Android WebRTC Signaling API! 
 
 This means that you can now create video chatting applications natively on Android in a breeze. Best of all, it is fully compatible with the PubNub Javascript WebRTC SDK! That's right, you are minutes away from creating your very own cross platform video-chatting application.
 
